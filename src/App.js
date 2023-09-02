@@ -1,12 +1,15 @@
 import "./App.css";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef } from "react";
 
 const Box = () => {
-  // useFrame((state) => {
-  //   console.log(state);
-  // });
+  const meshRef = useRef()
+  useFrame((state) => {
+    meshRef.current.rotation.x += 0.01
+    meshRef.current.rotation.y += 0.01
+  });
   return (
-    <mesh>
+    <mesh ref={meshRef}>
       <boxGeometry args={[1, 1, 1]} />
       <meshBasicMaterial color="orange" />
     </mesh>
