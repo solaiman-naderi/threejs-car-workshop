@@ -1,12 +1,25 @@
 import "./App.css";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
+import { useEffect, useRef } from "react";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
+const CameraController = () => {
+  const { camera, gl } = useThree();
+  useEffect(() => {
+    const controls = new OrbitControls(camera, gl.domElement);
+
+ 
+    return () => {
+      controls.dispose();
+    };
+  }, [camera, gl]);
+  return null;
+};
 const Box = () => {
-  const meshRef = useRef()
+  const meshRef = useRef();
   useFrame((state) => {
-    meshRef.current.rotation.x += 0.01
-    meshRef.current.rotation.y += 0.01
+    meshRef.current.rotation.x += 0.01;
+    meshRef.current.rotation.y += 0.01;
   });
   return (
     <mesh ref={meshRef}>
@@ -15,11 +28,14 @@ const Box = () => {
     </mesh>
   );
 };
+
 function App() {
   return (
     <div style={{ width: "100vm", height: "100vh" }}>
-      <Canvas style={{ background: "black" }}>
-        <Box />
+      <Canvas style={{ background: "black" }} camera={{ position: [3, 3, 3] }}>
+        {/* <Box /> */}
+        <CameraController />
+        <axesHelper args={[3]} />
       </Canvas>
     </div>
   );
