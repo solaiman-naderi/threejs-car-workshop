@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Canvas, useFrame } from "@react-three/fiber";
 
+const Box = () => {
+  // useFrame((state) => {
+  //   console.log(state);
+  // });
+  return (
+    <mesh>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshBasicMaterial color="orange" />
+    </mesh>
+  );
+};
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ width: "100vm", height: "100vh" }}>
+      <Canvas style={{ background: "black" }}>
+        <Box />
+      </Canvas>
     </div>
   );
 }
