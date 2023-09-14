@@ -1,9 +1,10 @@
 import * as THREE from "three";
+import state from "../../state";
 
 const ColorPicker = (props) => {
   const handleChangeColor = (e) => {
-    if (!window.activeMesh) return;
-    window.activeMesh.material.color = new THREE.Color(
+    if (!state.activeMesh) return;
+    state.activeMesh.material.color = new THREE.Color(
       e.target.style.background
     );
   };
@@ -19,7 +20,7 @@ const ColorPicker = (props) => {
       ></div>
       <div
         onClick={handleChangeColor}
-        style={{ width: "50px", height: "50px", background: "white" }}
+        style={{ width: "50px", height: "50px", background: "orange" }}
       ></div>
     </div>
   );
